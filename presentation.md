@@ -208,3 +208,6 @@ $ bs e
 --
 
 * GitHub PagesやS3、Netlifyなどでデプロイ👍
+--
+
+* 👉 https://tadashi-aikawa.github.io/backslide-sample/dist/presentation.html
