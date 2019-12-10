@@ -196,7 +196,7 @@ class: center, middle, impact
 
 ---
 
-# Deploy
+# Deploy (inline)
 
 ```
 $ bs e
@@ -204,10 +204,31 @@ $ bs e
 
 --
 
-* リソースが無ければ、Single HTMLができる😄
+* リソースが無ければ、Single HTMLができる😄 (約500KB + コンテンツ量)
 --
 
 * GitHub PagesやS3、Netlifyなどでデプロイ👍
+
+---
+
+# Deploy (no inline)
+
+```
+$ bs e -l
+```
+
 --
 
-* 👉 https://tadashi-aikawa.github.io/backslide-sample/dist/presentation.html
+* 外部リソース`remark.js.min`など)をHTMLに埋め込まない
+--
+
+  * そのままではパスの問題で参照できない可能性がある
+--
+
+  * `template/index.html`で`remark.js.min`の読みこみをCDN経由に..
+
+
+```diff
+-  <script src="remark.min.js"></script>  
++  <script src="https://cdnjs.cloudflare.com/ajax/libs/remark/0.14.0/remark.min.js"></script>  
+```
