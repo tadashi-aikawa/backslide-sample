@@ -67,12 +67,6 @@ $ bs serve
 
 ---
 
-class: center, middle, impact
-
-# Deploy
-
----
-
 # Deploy (inline)
 
 ```
