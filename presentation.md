@@ -67,6 +67,50 @@ $ bs serve
 
 ---
 
+class: center, middle, impact
+
+# Deploy
+
+---
+
+# Deploy (inline)
+
+```
+$ bs export
+```
+
+--
+
+* リソースが無ければ、Single HTMLができる😄 (約500KB + コンテンツ量)
+--
+
+* GitHub PagesやS3、Netlifyなどでデプロイ👍
+---
+
+# Deploy (no inline)
+
+```
+$ bs export -l
+```
+
+--
+
+* 外部リソース(`remark.js.min`など)をHTMLに埋め込まない
+--
+
+  * そのままではパスの問題で参照できない可能性がある
+--
+
+  * `template/index.html`で`remark.js.min`の読みこみをCDN経由に..
+
+
+```diff
+-  <script src="remark.min.js"></script>  
++  <script src="https://cdnjs.cloudflare.com/ajax/libs/remark/0.14.0/remark.min.js"></script>  
+```
+
+---
+
 class: center, middle
 
 # イチオシなところ
@@ -82,7 +126,13 @@ class: center, middle
 
 ---
 
-# Simple is Great
+# Simple
+
+* 以下3つのコマンドでOK
+  * `bs init`
+  * `bs serve`
+  * `bs export`
+--
 
 * デフォルトテンプレートがシンプルで格好いい！
 
@@ -178,9 +228,85 @@ class: center, middle
 
 # アニメーション機能
 
-* 文中の文字をアニメーションでフェードインできない (と思う)
+* 中抜き文字を気軽にフェードインできない
+--
+
   * reveal.jsだとfragmentクラスで実現可能
-* templateと変数を使えば多少は無理矢理実現できそう
+--
+
+* templateと変数を使えば無理矢理実現できそう
+
+---
+
+first_name: invisible
+last_name: invisible
+
+## 途中文字をフェードインする例
+
+* 私の姓は <span class="{{last_name}}">Aikawa</span> です
+* 私の名は <span class="{{first_name}}">Tadashi</span> です
+--
+
+first_name: visible
+--
+
+last_name: visible
+
+---
+
+## 途中文字をフェードインする例
+
+````markdown
+first_name: invisible
+last_name: invisible
+
+## 中抜け文字をフェードインする例
+
+ * 私の姓は <span class="{{last_name}}">Aikawa</span> です
+ * 私の名は <span class="{{first_name}}">Tadashi</span> です
+
+--
+
+first_name: visible
+--
+
+last_name: visible
+
+--
+````
+
+---
+
+## 途中文字をフェードインする例
+
+`style.scss`
+
+```scss
+.visilbe {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+}
+```
+
+---
+
+## 途中文字をフェードインする例
+
+グリッドや複雑なレイアウトを使う場合は`template`と組み合わせて使う必要あり
+
+---
+
+# ローカルのリソースが参照できない
+
+* 画像ファイルを同梱する場合、デプロイしたら参照できない
+  * exportの際に相対パスが **ファイルシステムの絶対パス** に置換される..
+--
+
+* 絶対パスを相対パスのままexportする方法があればいける?
+
 
 ---
 
@@ -190,45 +316,6 @@ class: center, middle
 
 ---
 
-class: center, middle, impact
+class: impact
 
-# Deploy
-
----
-
-# Deploy (inline)
-
-```
-$ bs e
-```
-
---
-
-* リソースが無ければ、Single HTMLができる😄 (約500KB + コンテンツ量)
---
-
-* GitHub PagesやS3、Netlifyなどでデプロイ👍
-
----
-
-# Deploy (no inline)
-
-```
-$ bs e -l
-```
-
---
-
-* 外部リソース`remark.js.min`など)をHTMLに埋め込まない
---
-
-  * そのままではパスの問題で参照できない可能性がある
---
-
-  * `template/index.html`で`remark.js.min`の読みこみをCDN経由に..
-
-
-```diff
--  <script src="remark.min.js"></script>  
-+  <script src="https://cdnjs.cloudflare.com/ajax/libs/remark/0.14.0/remark.min.js"></script>  
-```
+# That's all👍
